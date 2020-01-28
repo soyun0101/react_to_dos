@@ -22,16 +22,40 @@ const toDos = [
 
 ]
 
-function ToDoList(props){
+// function ToDoList(props){
+//     const toDoElements = toDos.map((item) => {
+//         return <ListItem key={item.id} title={item.title} />
+//     });
+
+//     return (
+//         <ol>
+//             {toDoElements}
+//         </ol>
+//     );
+// }
+
+
+
+class ToDoList extends React.Component{
+    constructor(props){
+        super(props);
+            this.state = {
+                list: []
+            };
+        
+    }
+    render(){
+        
     const toDoElements = toDos.map((item) => {
         return <ListItem key={item.id} title={item.title} />
     });
-
-    return (
-        <ol>
+        return(
+            <ol>
             {toDoElements}
-        </ol>
-    );
+             </ol>
+        )
+    }
 }
+
 
 export default ToDoList;
