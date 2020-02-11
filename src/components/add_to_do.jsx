@@ -5,29 +5,58 @@ class AddToDo extends React.Component{
         super(props);
 
         this.state = {
+            description: '',
             title: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     handleChange(e){
-        console.log('change event: ');
-        console.dir(e.target);
+        // console.log('change event: ');
+        // console.dir(e.target.name);
 
-        console.log('input value: ', event.target.value);
+        // console.log('input value: ', event.target.value);
+
+        const {name, value} = e.target;
+
         this.setState({
-            title: event.target.value
+            [name]: value
         });
     }
+
+    handleSubmit(e){
+        e.preventDefault();
+        console.log('Form values: ', this.state);
+    }
+
+    reset(){
+        this.setState({
+            description: '',
+            title: ''
+        })
+    }
     render(){
+        
+        const {description, title} = this.state;
+
         return(
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <h1>Add To Do</h1>
 
                 <div>
                     <label htmlFor="title">Title: </label>
-                    <input value={this.state.title} onChange={this.handleChange} type="text" id="title"/>
+                    <input value={title} name="title" onChange={this.handleChange} type="text" id="title"/>
+                </div>
+                <div>
+                    <label htmlFor="description">Description: </label>
+                    <input value={description} name="description" onChange={this.handleChange} type="text" id="description"/>
+                </div>
+                <div>
+                    <button>Add To Do</button>
+                    <button onClick={this.reset} type="button">Reset</button>
                 </div>
             </form>
         )
